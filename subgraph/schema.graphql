@@ -1,0 +1,11 @@
+type Account @entity {
+  id: ID!
+  balance: BigInt!
+}
+
+type Transfer @entity {
+  id: ID!
+  from: Account!
+  to: Account!
+  value: BigInt!
+}

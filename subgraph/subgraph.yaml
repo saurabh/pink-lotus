@@ -1,0 +1,25 @@
+specVersion: 0.0.4
+description: Track ERC20 transfers and balances
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: ERC20
+    network: sepolia
+    source:
+      address: "0xABdD6278e964453C8c675FB0DAD201001902cf33"
+      abi: ERC20
+      startBlock: 4147147
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      file: ./mapping.ts
+      entities:
+        - Transfer
+      abis:
+        - name: ERC20
+          file: ../pink-lotus-dao.abi.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
