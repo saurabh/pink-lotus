@@ -41,7 +41,7 @@ const GET_TRANSACTION_HISTORY = gql`
 
 export default async function getTransactionHistory(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const result: Result = await request(process.env.NEXT_PUBLIC_SUBGRAPH_URL || '', GET_TRANSACTION_HISTORY);
+    const result: Result = await request(process.env.NEXT_PUBLIC_SUBGRAPH_URL ?? '', GET_TRANSACTION_HISTORY);
     res.status(200).json(result);
   } catch (error) {
     console.error('Error parsing JSON:', error);

@@ -32,7 +32,6 @@ const Tooltip = ({ message }: { message: string }) => {
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
         onTouchStart={handleTouchStart}
-        onTouchEnd={() => {}}
       />
       <div style={{ backdropFilter: 'blur(25px)' }} className={`absolute top-1/2 transform -translate-y-1/2 left-full ml-2 p-2 rounded bg-gray-200 box-border w-[250px] h-[75px] border-[1px] border-solid border-black ${showTooltip ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200`}>
         <div className="text-black inline-block">

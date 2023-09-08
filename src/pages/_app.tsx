@@ -11,12 +11,12 @@ import '@rainbow-me/rainbowkit/styles.css';
 const MyApp: AppType = ({ Component, pageProps }) => {
   const { chains, publicClient } = configureChains(
     [sepolia],
-    [alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_KEY || '' })]
+    [alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_KEY ?? '' })]
   );
   
   const { connectors } = getDefaultWallets({
     appName: 'Baton Finance Challenge',
-    projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || '',
+    projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID ?? '',
     chains
   });
 

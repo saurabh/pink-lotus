@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import { useRouter } from 'next/router'
 // import { ConnectButton } from "@rainbow-me/rainbowkit"
 import Tooltip from "../components/tooltip";
 import { CustomConnect } from '../components/CustomConnectButton';
@@ -7,9 +6,6 @@ import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 
 const Home: NextPage = () => {
-  const router = useRouter()
-  if (!router.isReady) return null
-
   const { address, isConnected } = useAccount()
   const { connect } = useConnect({
     connector: new InjectedConnector(),
