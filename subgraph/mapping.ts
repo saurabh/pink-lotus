@@ -23,8 +23,9 @@
 //   transfer.from = fromAccount.id
 //   transfer.to = toAccount.id
 //   transfer.value = event.params.amount
+//   transfer.timestamp = event.block.timestamp;
 
-//   fromAccount.save()1
+//   fromAccount.save()
 //   toAccount.save()
 //   transfer.save()
 // }

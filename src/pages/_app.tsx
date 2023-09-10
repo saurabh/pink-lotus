@@ -1,4 +1,5 @@
 import { type AppType } from "next/dist/shared/lib/utils";
+import { useEffect, useState } from 'react';
 import { RainbowKitProvider, lightTheme } from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { sepolia } from 'wagmi/chains';
@@ -7,8 +8,15 @@ import { getDefaultWallets } from '@rainbow-me/rainbowkit';
 
 import "~/styles/globals.css";
 import '@rainbow-me/rainbowkit/styles.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MyApp: AppType = ({ Component, pageProps }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const { chains, publicClient } = configureChains(
     [sepolia],
     [alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_KEY ?? '' })]
@@ -31,7 +39,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       <RainbowKitProvider 
         chains={chains} 
         coolMode 
-        showRecentTransactions={true}
+        showRecentTransactions={false}
         theme={lightTheme({
           accentColor: '#FF007A',
           accentColorForeground: 'white',
@@ -41,7 +49,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         })}
         modalSize="compact"
       >
-        <Component {...pageProps} />
+        {isMounted && <Component {...pageProps} />}
       </RainbowKitProvider>
     </WagmiConfig>
   );

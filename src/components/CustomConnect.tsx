@@ -1,7 +1,26 @@
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
+export const CustomConnect= () => {
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-export const CustomConnect = () => {
+  useEffect(() => {
+    if (buttonRef.current) {
+      const button = buttonRef.current;
+
+      gsap.set(button, { scale: 1 });
+
+      button.addEventListener('mouseenter', () => {
+        gsap.to(button, { scale: 1.1, duration: 0.3 });
+      });
+
+      button.addEventListener('mouseleave', () => {
+        gsap.to(button, { scale: 1, duration: 0.3 });
+      });
+    }
+  }, []);
+
   return (
     <ConnectButton.Custom>
       {({
@@ -35,6 +54,7 @@ export const CustomConnect = () => {
               if (!connected) {
                 return (
                   <button 
+                    ref={buttonRef}
                     onClick={openConnectModal} 
                     className="
                     bg-pink border-2 border-deeppink text-black rounded-md w-[20rem] p-4 text-xl"
@@ -55,7 +75,7 @@ export const CustomConnect = () => {
                   <button
                     onClick={openChainModal}
                     style={{ display: 'flex', alignItems: 'center' }}
-                    className='bg-pink border-1 text-black rounded-md w-[6rem] p-2 text-lg'
+                    className='bg-pink border-2 border-deeppink text-black rounded-md w-[6rem] p-2 text-lg text-center'
                     type="button"
                   >
                     {chain.hasIcon && (
@@ -80,7 +100,7 @@ export const CustomConnect = () => {
                     )}
                     {chain.name}
                   </button>
-                  <button onClick={openAccountModal} type="button" className='bg-pink border-1 text-black rounded-md w-[13rem] p-2 text-lg'>
+                  <button onClick={openAccountModal} type="button" className='bg-pink border-2 border-deeppink text-black rounded-md w-[15rem] p-2 text-lg'>
                     {account.displayName}
                     {account.displayBalance
                       ? ` (${account.displayBalance})`
@@ -95,21 +115,3 @@ export const CustomConnect = () => {
     </ConnectButton.Custom>
   );
 };
-
-
-                  // <button 
-                  //   onClick={openConnectModal} 
-                  //   type="button"
-                  //   className="
-                  //     font-normal 
-                  //     py-1 px-5 mr-5
-                  //     text-base 
-                  //     bg-pink 
-                  //     border-2 border-deeppink 
-                  //     rounded 
-                  //     flex 
-                  //     items-center 
-                  //     cursor-pointer"
-                  // >
-                  //   Connect
-                  // </button>

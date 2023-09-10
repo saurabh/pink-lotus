@@ -8,4 +8,5 @@ type Transfer @entity {
   from: Account!
   to: Account!
   value: BigInt!
+  timestamp: BigInt! 
 }

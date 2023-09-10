@@ -11,22 +11,27 @@ export interface Transfer {
   from: { id: string };
   to: { id: string };
   value: string;
+  timestamp: number;
 }
 
-export interface Result {
+export interface Response {
   data: {
     accounts: Account[];
     transfers: Transfer[];
   };
 }
 
-const GET_TRANSACTION_HISTORY = gql`
-{
-  accounts(first: 25) {
+interface ReqBody {
+  userAddress: string;
+}
+
+const accountsAndTransfersQuery = gql`
+query ($id: String!) {
+  accounts(where: { id: $id }) {
     id
     balance
   }
-  transfers(first: 100) {
+  transfers(where: { to: $id }) {
     id
     from {
       id
@@ -35,13 +40,15 @@ const GET_TRANSACTION_HISTORY = gql`
       id
     }
     value
+    timestamp
   }
 }
 `;
 
 export default async function getTransactionHistory(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const result: Result = await request(process.env.NEXT_PUBLIC_SUBGRAPH_URL ?? '', GET_TRANSACTION_HISTORY);
+    const { userAddress }: ReqBody = req.body as ReqBody;
+    const result: Response = await request(process.env.NEXT_PUBLIC_SUBGRAPH_URL ?? '', accountsAndTransfersQuery, { id: userAddress });
     res.status(200).json(result);
   } catch (error) {
     console.error('Error parsing JSON:', error);
