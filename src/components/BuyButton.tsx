@@ -57,8 +57,8 @@ export const BuyButton: React.FC<BuyButtonProps> = ({ amount, buy, buyTxLoading,
       ref={buttonRef}
       onClick={() => buy?.()} 
       className={`border-2 rounded-md w-full p-4 text-xl flex items-center justify-center h-[65px] 
-                  ${buyStatus === 'loading' || buyTxLoading || buyConfigStatus === 'error' ? 'bg-gray-400 text-gray-700' : 'bg-pink text-black border-deeppink'}`}
-      disabled={buyStatus === 'loading' || amount === '' || buyTxLoading || buyConfigStatus === 'error'}
+                  ${buyStatus === 'loading' || buyTxLoading ? 'bg-gray-400 text-gray-700' : 'bg-pink text-black border-deeppink'}`}
+      disabled={buyStatus === 'loading' || amount === '' || buyTxLoading }
     >
       <AnimatePresence mode="wait">
         {(!showSuccess || buyStatus === 'idle' || buyStatus === 'error') && <motion.span key="buy" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>Buy</motion.span>}
