@@ -49,7 +49,7 @@ const Home: NextPage = () => {
     functionName: 'totalSupply',
   });
 
-  const { error: buyConfigError, config: buyConfig } = usePrepareContractWrite({
+  const { error: buyConfigError, config: buyConfig, status: buyConfigStatus } = usePrepareContractWrite({
     address: PINKAddress,
     abi,
     functionName: 'buy',
@@ -110,7 +110,7 @@ const Home: NextPage = () => {
     <div className="bg-white w-full h-screen flex flex-col">
       <Head>
         <title>Pink Lotus DAO</title>
-        <meta name="Take home task for Baton Finance"/>
+        <meta name="White Lotus Wen"/>
         <link rel="icon" href="favicon.ico" />
       </Head>
       <div className="flex justify-end p-4">
@@ -128,6 +128,7 @@ const Home: NextPage = () => {
                 style={{ appearance: 'none', MozAppearance: 'textfield' }} 
                 className="border rounded border-black p-3 mb-4 w-full h-8 text-lg" 
                 type="number" 
+                min="0"
                 value={amount}
                 onChange={handleAmountChange}
                 placeholder="0.0" 
@@ -142,8 +143,10 @@ const Home: NextPage = () => {
             {!isConnected ? 
               <CustomConnect /> : 
               <BuyButton 
+                amount={amount}
                 buy={buy} 
                 buyTxLoading={buyTxLoading} 
+                buyConfigStatus={buyConfigStatus} 
                 buyTxError={buyTxError} 
                 buyTxStatus={buyTxData ? buyTxData?.status : ''} 
                 buyStatus={buyStatus} 

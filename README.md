@@ -1,3 +1,13 @@
+# Development Notes:
+
+This dapp is a nextjs typescript application built with rainbowkit, wagmi hooks, subgraphs for querying LOTUS erc20 token transactions, tailwindcss and gsap and framer-motion for animations.
+
+Wagmi hooks were used to interact with the contract and follow the transaction lifecycle. Some error cases were covered (insufficient funds to purchase LOTUS, user rejected tx).
+
+The Past purchases component is only rendered when the user address is connected. Pagination instead of a load more button.
+
+
+
 # Pink lotus DAO
 
 Pink lotus DAO is a DAO for the pink lotus community. Your task is to create a single page dapp that allows users to mint new pink lotus tokens. The dapp should display the current price of the pink lotus token (which is `1 LOTUS = keccak256(totalSupply) % 0.1 ether`) and also show historical purchases.

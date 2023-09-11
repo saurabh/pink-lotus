@@ -79,14 +79,14 @@ export const HistoricalTransactions = ({ shouldRefresh }: { shouldRefresh: boole
         <div className="w-full flex justify-center mt-2">
           <button 
             onClick={handlePrev} 
-            className="bg-transparent text-blue-500" 
+            className="bg-pink border-2 border-deeppink text-black rounded-md w-[2rem] mx-1 text-xl"
             disabled={displayCount <= 5}
           >
             &lt;
           </button>
           <button 
             onClick={handleNext} 
-            className="bg-transparent text-blue-500" 
+            className="bg-pink border-2 border-deeppink text-black rounded-md w-[2rem] mx-1 text-xl"
             disabled={data.transfers.length <= displayCount}
           >
             &gt;

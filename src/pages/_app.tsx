@@ -23,7 +23,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   );
   
   const { connectors } = getDefaultWallets({
-    appName: 'Baton Finance Challenge',
+    appName: 'Pink Lotus DAO',
     projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID ?? '',
     chains
   });
